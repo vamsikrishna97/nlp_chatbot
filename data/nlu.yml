@@ -1,0 +1,75 @@
+nlu:
+- intent: greet
+  examples: |
+    - नमस्कार
+    - सलाम
+    - हेलो
+    - नमस्ते
+    - प्रणाम
+
+# - intent: goodbye
+#   examples: |
+#     - Bye           
+#     - Goodbye
+#     - See you later
+#     - Bye bot
+#     - Goodbye friend
+#     - bye
+#     - bye for now
+#     - catch you later
+#     - gotta go
+#     - See you
+#     - goodnight
+#     - have a nice day
+#     - i'm off
+#     - see you later alligator
+#     - we'll speak soon
+#     - end
+#     - finish
+#     - gtg
+
+- intent: thanks
+  examples: |
+    - धन्यवाद
+    - शुक्रिया
+    - जी शुक्रिया
+    - जी
+
+# - intent: affirm
+#   examples: |
+#     - y
+#     - Y
+#     - yes
+#     - yes sure
+#     - absolutely
+#     - for sure
+#     - yes yes yes
+#     - definitely
+#     - yes, it did.
+
+# - intent: deny
+#   examples: |
+#     - no
+#     - never
+#     - I don't think so
+#     - don't like that
+#     - no way
+#     - not really
+#     - n
+#     - N
+
+- intent: lang_search
+  examples: |
+    - मुझे [हिंदी] के बारे में बताओ
+
+
+
+
+
+
+    
+
+
+    
+    
+    

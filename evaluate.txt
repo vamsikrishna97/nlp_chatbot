@@ -1,0 +1,4 @@
+Talk about dothraki? - Should return a default statement
+Talk about languages not in db?  - Should return a default value
+talk abut kannada - Spelling mistakes are not considered
+Cabye, nobye, talk nobye - all of this treated as bye intent
