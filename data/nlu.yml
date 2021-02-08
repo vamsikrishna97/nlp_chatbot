@@ -7,26 +7,22 @@ nlu:
     - नमस्ते
     - प्रणाम
 
-# - intent: goodbye
-#   examples: |
-#     - Bye           
-#     - Goodbye
-#     - See you later
-#     - Bye bot
-#     - Goodbye friend
-#     - bye
-#     - bye for now
-#     - catch you later
-#     - gotta go
-#     - See you
-#     - goodnight
-#     - have a nice day
-#     - i'm off
-#     - see you later alligator
-#     - we'll speak soon
-#     - end
-#     - finish
-#     - gtg
+- intent: goodbye
+  examples: |
+    - अलविदा           
+    - फिर मिलेंगे
+    - जल्द ही फिर मिलेंगे
+    - अलविदा बॉट
+    - बाय दोस्त
+    - फिर मिलेंगे दोस्त
+    - अभी के लिए अलविदा
+    - अलविदा दोस्त
+    - मुझे जाना है
+    - अब मै जाऊँगी
+    - सुसंध्या
+    - आपका दिन शुभ हो
+    - हम जल्द ही बात करेंगे
+    - समाप्त
 
 - intent: thanks
   examples: |
@@ -35,32 +31,28 @@ nlu:
     - जी शुक्रिया
     - जी
 
-# - intent: affirm
-#   examples: |
-#     - y
-#     - Y
-#     - yes
-#     - yes sure
-#     - absolutely
-#     - for sure
-#     - yes yes yes
-#     - definitely
-#     - yes, it did.
+- intent: affirm
+  examples: |
+    - y
+    - हाँ
+    - जी श्रीमान
+    - जी 
+    - हाँ ज़रूर
+    - जी ज़रूर
+    - निश्चित रूप से
 
-# - intent: deny
-#   examples: |
-#     - no
-#     - never
-#     - I don't think so
-#     - don't like that
-#     - no way
-#     - not really
-#     - n
-#     - N
+- intent: deny
+  examples: |
+    - नहीं न
+    - नहीं
+    - मुझे ऐसा नहीं लगता
+    - मुझे नहीं लगता
+    - कभी नहीं
+    - ज़रुरी नहीं
 
 - intent: lang_search
   examples: |
-    - मुझे [हिंदी] के बारे में बताओ
+    - मुझे हिंदी [language] के बारे में बताओ
 
 
 

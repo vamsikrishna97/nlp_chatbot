@@ -4,10 +4,10 @@ rules:
    - intent: greet
    - action: utter_greet
 
-#  - rule: say bye to the user
-#    steps:
-#    - intent: goodbye
-#    - action: utter_goodbye
+ - rule: say bye to the user
+   steps:
+   - intent: goodbye
+   - action: utter_goodbye
 
  - rule: search a language details based on user query
    steps:

@@ -44,8 +44,4 @@ actions:
 - action_lang_search
 - utter_thanks
 - feedback_reply
-# - utter_subscribed
-# forms:
-#   newsletter_form:
-#     email:
-#     - type: from_text
+
