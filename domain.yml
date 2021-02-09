@@ -18,25 +18,27 @@ entities:
 responses:
   utter_greet:
   - text: |
-      Hello! How can I help you?
+      अरे! क्या हाल है?
   - text: |
-      Hi!
+      हेलो
   - text: |
-      Hey! What can I do for you?  
+      सलाम
+  - text: |
+      प्रणाम
   utter_goodbye:
   - text: |
-      Bye
+      अलविदा
   - text: |
-      It was nice talking to you.
+      बाय दोस्त
   - text: |
-      See you again!
+      फिर मिलेंगे
   utter_thanks:
   - text: |
-      Glad that I could be of help!
+      धन्यवाद
   - text: |
-      Thank you!
+      जी शुक्रिया
   - text: |
-      Happy to help :)  
+      मदद करने के लिए खुश :)
 actions:
 - '...'
 - utter_greet
@@ -44,4 +46,3 @@ actions:
 - action_lang_search
 - utter_thanks
 - feedback_reply
-
