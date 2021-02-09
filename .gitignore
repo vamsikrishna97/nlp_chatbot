@@ -1,0 +1,5 @@
+*/models/*
+*/*.pyc
+*/*/.pyc
+models
+credentials.yml
