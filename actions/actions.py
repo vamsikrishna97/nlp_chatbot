@@ -42,12 +42,12 @@ class ActionLanguageSearch(Action):
 
                 if len(out_row) > 0:
                     out_row = out_row[0]
-                    out_text = "Language %s belongs to the Family %s\n with Genus as %s\n and has ISO code %s" % (out_row["Name"], out_row["Family"], out_row["Genus"], out_row["ISO_codes"])
+                    out_text = "%s भाषा %s परिवार से संबंधित है।\nइसका जीनस %s है।\nइसका ISO कोड %s है।" % (query_lang, out_row["Family"], out_row["Genus"], out_row["ISO_codes"])
                     dispatcher.utter_message(text = out_text)
                 else:
-                    dispatcher.utter_message(text = "Sorry! We don't have records for the language %s" % query_lang)
+                    dispatcher.utter_message(text = "क्षमा करें! हमारे पास %s भाषा के रिकॉर्ड नहीं हैं।" % query_lang)
             except:
-                dispatcher.utter_message(text = "Unable to contact Google API, try again.")
+                dispatcher.utter_message(text = "Google API से संपर्क करने में असमर्थ, पुनः प्रयास करें।")
 
         return []
 
@@ -59,5 +59,5 @@ class FeedbackReply(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        dispatcher.utter_message(text = "Did that help you?")
+        dispatcher.utter_message(text = "क्या इससे आपको मदद मिली, बेटा?")
         return []
