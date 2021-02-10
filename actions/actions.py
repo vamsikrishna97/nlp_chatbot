@@ -14,6 +14,7 @@ from rasa_sdk.executor import CollectingDispatcher
 
 import pandas as pd
 import os
+import goslate 
 
 class ActionLanguageSearch(Action):
 
@@ -32,15 +33,21 @@ class ActionLanguageSearch(Action):
             query_lang = entities.pop()
             query_lang = query_lang.lower().capitalize()
             print(query_lang)
-            
-            out_row = wals_data[wals_data["Name"] == query_lang].to_dict("records")
+        
+            try:
+                gs = goslate.Goslate()
+                final  = gs.translate(query_lang, 'en')  
+                print(final)
+                out_row = wals_data[wals_data["Name"] == final].to_dict("records")
 
-            if len(out_row) > 0:
-                out_row = out_row[0]
-                out_text = "Language %s belongs to the Family %s\n with Genus as %s\n and has ISO code %s" % (out_row["Name"], out_row["Family"], out_row["Genus"], out_row["ISO_codes"])
-                dispatcher.utter_message(text = out_text)
-            else:
-                dispatcher.utter_message(text = "Sorry! We don't have records for the language %s" % query_lang)
+                if len(out_row) > 0:
+                    out_row = out_row[0]
+                    out_text = "Language %s belongs to the Family %s\n with Genus as %s\n and has ISO code %s" % (out_row["Name"], out_row["Family"], out_row["Genus"], out_row["ISO_codes"])
+                    dispatcher.utter_message(text = out_text)
+                else:
+                    dispatcher.utter_message(text = "Sorry! We don't have records for the language %s" % query_lang)
+            except:
+                dispatcher.utter_message(text = "Unable to contact Google API, try again.")
 
         return []
 
