@@ -15,11 +15,17 @@ rules:
    - action: action_lang_search
    - action: feedback_reply
 
+ - rule: search languages prevalent in a country based on user query
+   steps:
+   - intent: country_search
+   - action: action_country_search
+   - action: feedback_reply
+
  - rule: respond positively when the user says thank you
    steps:
    - intent: thanks
    - action: utter_thanks
-   
+
   # - rule: submit form
  #   condition:
  #   - active_loop: newsletter_form

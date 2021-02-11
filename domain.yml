@@ -9,6 +9,7 @@ intents:
   - affirm
   - deny
   - lang_search
+  - country_search
 entities:
   - language
 # slots:
@@ -46,5 +47,6 @@ actions:
 - utter_greet
 - utter_goodbye
 - action_lang_search
+- action_country_search
 - utter_thanks
 - feedback_reply
