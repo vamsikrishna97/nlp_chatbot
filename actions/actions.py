@@ -14,7 +14,7 @@ from rasa_sdk.executor import CollectingDispatcher
 
 import pandas as pd
 import os
-import goslate 
+import goslate
 
 class ActionLanguageSearch(Action):
 
@@ -33,10 +33,10 @@ class ActionLanguageSearch(Action):
             query_lang = entities.pop()
             query_lang = query_lang.lower().capitalize()
             print(query_lang)
-        
+
             try:
                 gs = goslate.Goslate()
-                final  = gs.translate(query_lang, 'en')  
+                final  = gs.translate(query_lang, 'en')
                 print(final)
                 out_row = wals_data[wals_data["Name"] == final].to_dict("records")
 
@@ -46,6 +46,45 @@ class ActionLanguageSearch(Action):
                     dispatcher.utter_message(text = out_text)
                 else:
                     dispatcher.utter_message(text = "क्षमा करें! हमारे पास %s भाषा के रिकॉर्ड नहीं हैं।" % query_lang)
+            except:
+                dispatcher.utter_message(text = "Google API से संपर्क करने में असमर्थ, पुनः प्रयास करें।")
+
+        return []
+
+class ActionCountrySearch(Action):
+
+    def name(self) -> Text:
+        return "action_country_search"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        countries_languages_path = os.path.join("data", "cldf-datasets-wals-014143f", "created", "lang_country_info.csv")
+        countries_languages_data = pd.read_csv(countries_languages_path)
+
+        entities = list(tracker.get_latest_entity_values("country"))
+
+        if len(entities) > 0:
+            query_lang = entities.pop()
+            query_lang = query_lang.lower().title()
+            print(query_lang)
+
+            try:
+                gs = goslate.Goslate()
+                final  = gs.translate(query_lang, 'en')
+                print(final)
+                out_row = countries_languages_data[countries_languages_data["country_name"] == final].to_dict("records")
+
+                if len(out_row) > 0:
+                    languages = []
+                    for i in range(len(out_row)):
+                        languages.append(out_row[i]["name"])
+                    print(languages)
+                    out_text = "%s की भाषा/एँ: \n%s" % (query_lang, ", ".join(languages))
+                    dispatcher.utter_message(text = out_text)
+                else:
+                    dispatcher.utter_message(text = "क्षमा करें! हमारे पास %s देश के रिकॉर्ड नहीं हैं।" % query_lang)
             except:
                 dispatcher.utter_message(text = "Google API से संपर्क करने में असमर्थ, पुनः प्रयास करें।")
 
