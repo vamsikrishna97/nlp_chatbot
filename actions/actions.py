@@ -115,6 +115,7 @@ class TLFLanguages(Action):
         df = df[df['Name'].notnull()]
         df['L1 - Mother tongue']= df['L1 - Mother tongue'].str.lower()
         entities = list(tracker.get_latest_entity_values("language"))
+        print(entities)
         if len(entities) > 0:
             query_lang = entities.pop()
             query_lang = query_lang.lower().title()
