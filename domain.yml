@@ -10,6 +10,7 @@ intents:
   - deny
   - lang_search
   - country_search
+  - tlf_language
 entities:
   - language
 # slots:
@@ -48,5 +49,6 @@ actions:
 - utter_goodbye
 - action_lang_search
 - action_country_search
+- action_tlf_language
 - utter_thanks
 - feedback_reply

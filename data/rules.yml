@@ -21,6 +21,11 @@ rules:
    - action: action_country_search
    - action: feedback_reply
 
+ - rule: search students from TLF who speak the same language
+   steps:
+   - intent: tlf_language
+   - action: action_tlf_language
+
  - rule: respond positively when the user says thank you
    steps:
    - intent: thanks

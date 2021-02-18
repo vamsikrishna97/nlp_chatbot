@@ -24,7 +24,7 @@ class ActionLanguageSearch(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
+        print('LANG SEARCH')
         data_path = os.path.join("data", "cldf-datasets-wals-014143f", "cldf", "languages.csv")
         wals_data = pd.read_csv(data_path)
         entities = list(tracker.get_latest_entity_values("language"))
@@ -99,4 +99,40 @@ class FeedbackReply(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         dispatcher.utter_message(text = "क्या इससे आपको मदद मिली, बेटा?")
+        return []
+
+class TLFLanguages(Action):
+
+    def name(self) -> Text:
+        return "action_tlf_language"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        print('TLF LANGUAGES')
+        data_path = os.path.join("data", "linguistic_bg_students.csv")
+        df = pd.read_csv(data_path)
+        df = df[df['Name'].notnull()]
+        df['L1 - Mother tongue']= df['L1 - Mother tongue'].str.lower()
+        entities = list(tracker.get_latest_entity_values("language"))
+        if len(entities) > 0:
+            query_lang = entities.pop()
+            query_lang = query_lang.lower().title()
+            print(query_lang)
+            try:
+                out_row = df[df['L1 - Mother tongue'] == query_lang ]
+                if len(out_row) > 0:
+                    people = []
+                    for i in range(len(out_row)):
+                        people.append(out_row[i]["Name"])
+                    print(people)
+                    out_text = "%s की भाषा/एँ: \n%s" % (query_lang, ", ".join(languages))
+                    dispatcher.utter_message(text = out_text)
+                else:
+                    dispatcher.utter_message(text = 'could not find {}'.format(query_lang))
+        
+            except:
+                dispatcher.utter_message(text = "LOLWA")
+
+
         return []
