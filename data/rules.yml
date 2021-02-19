@@ -21,7 +21,7 @@ rules:
    - action: action_country_search
    - action: feedback_reply
 
- - rule: search students from TLF who speak the same language
+ - rule: search students from TLF'21 who know the inputted language
    steps:
    - intent: tlf_language
    - action: action_tlf_language

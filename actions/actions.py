@@ -109,7 +109,6 @@ class TLFLanguages(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        print('TLF LANGUAGES')
         data_path = os.path.join("data", "linguistic_bg_students.csv")
         df = pd.read_csv(data_path)
         df = df[df['Name'].notnull()]
@@ -131,9 +130,9 @@ class TLFLanguages(Action):
                     dispatcher.utter_message(text = out_text)
                 else:
                     dispatcher.utter_message(text = 'could not find {}'.format(query_lang))
-        
+
             except:
-                dispatcher.utter_message(text = "LOLWA")
+                dispatcher.utter_message(text = "Google API से संपर्क करने में असमर्थ, पुनः प्रयास करें।")
 
 
         return []
