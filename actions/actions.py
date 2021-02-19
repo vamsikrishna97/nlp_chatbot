@@ -18,6 +18,8 @@ import os
 from google_trans_new import google_translator
 import re
 
+import random
+
 class ActionLanguageSearch(Action):
 
     def name(self) -> Text:
@@ -58,7 +60,7 @@ class ActionLanguageSearch(Action):
                 else:
                     dispatcher.utter_message(text = "क्षमा करें! हमारे पास %s भाषा के रिकॉर्ड नहीं हैं।" % query_lang)
             except:
-                dispatcher.utter_message(text = "Google API से संपर्क करने में असमर्थ, पुनः प्रयास करें।")
+                dispatcher.utter_message(text = "बेटा, System Error के लिए माफी माँगता हूँ। कुछ समय बाद प्रयास करें।")
 
         return []
 
@@ -102,7 +104,7 @@ class ActionCountrySearch(Action):
                 else:
                     dispatcher.utter_message(text = "क्षमा करें! हमारे पास %s देश के रिकॉर्ड नहीं हैं।" % query_lang)
             except:
-                dispatcher.utter_message(text = "Google API से संपर्क करने में असमर्थ, पुनः प्रयास करें।")
+                dispatcher.utter_message(text = "बेटा, System Error के लिए माफी माँगता हूँ। कुछ समय बाद प्रयास करें।")
 
         return []
 
@@ -183,7 +185,7 @@ class ActionExampleLanguage(Action):
             translator = google_translator()
             english_translation  = translator.translate(query_lang,lang_tgt='en').lower()
             english_translation  = re.sub("[^a-zA-Z]+", "", english_translation).capitalize()
-
+            print(english_translation)
             out_row = wals_data_languages[wals_data_languages["Name"] == english_translation].to_dict("records")
 
             if len(out_row) > 0:
@@ -198,6 +200,6 @@ class ActionExampleLanguage(Action):
                 else:
                     dispatcher.utter_message(text = "क्षमा करें! हमारे पास %s भाषा के रिकॉर्ड नहीं हैं।" % query_lang)
         except:
-            dispatcher.utter_message(text = "Google API से संपर्क करने में असमर्थ, पुनः प्रयास करें।")
+            dispatcher.utter_message(text = "बेटा, System Error के लिए माफी माँगता हूँ। कुछ समय बाद प्रयास करें।")
 
         return []

@@ -14,6 +14,7 @@ intents:
   - example_language
 entities:
   - language
+  - country
 # slots:
 #   email:
 #     type: unfeaturized
@@ -21,7 +22,7 @@ entities:
 responses:
   utter_greet:
   - text: |
-      नमस्कार बेटा! क्या हाल है?
+      नमस्कार बेटा!
   - text: |
       हेलो बेटा
   - text: |
