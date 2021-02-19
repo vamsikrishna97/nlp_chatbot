@@ -11,6 +11,7 @@ intents:
   - lang_search
   - country_search
   - tlf_language
+  - example_language
 entities:
   - language
 # slots:
@@ -52,3 +53,4 @@ actions:
 - action_tlf_language
 - utter_thanks
 - feedback_reply
+- action_example_language

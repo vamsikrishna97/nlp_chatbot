@@ -153,3 +153,47 @@ class TLFLanguages(Action):
 
 
         return []
+
+class ActionExampleLanguage(Action):
+
+    def name(self) -> Text:
+        return "action_example_language"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        print('EXAMPLE SEARCH')
+        data_path_languages = os.path.join("data", "cldf-datasets-wals-014143f", "cldf", "language_names.csv")
+        wals_data_languages = pd.read_csv(data_path_languages)
+        entities = list(tracker.get_latest_entity_values("language"))
+
+        data_path_examples = os.path.join("data", "cldf-datasets-wals-014143f", "cldf", "examples.csv")
+        wals_data_examples = pd.read_csv(data_path_examples)
+        
+        if len(entities) > 0:
+            query_lang = entities.pop()
+            print(query_lang)
+
+        try:
+            translator = google_translator() 
+            english_translation  = translator.translate(query_lang,lang_tgt='en').lower()
+            english_translation  = re.sub("[^a-zA-Z]+", "", english_translation).capitalize()
+
+            out_row = wals_data_languages[wals_data_languages["Name"] == english_translation].to_dict("records")
+
+            if len(out_row) > 0:
+                out_row = out_row[0]
+                out_row["Language_ID"]
+                examples_out_row = wals_data_examples[wals_data_examples["Language_ID"] == out_row["Language_ID"]].to_dict("records")
+
+                if len(examples_out_row) > 0:
+                    examples_out_row = random.choice(examples_out_row)
+                    out_text = "बेटा! %s भाषा का एक उदाहरण कुछ इस तरह है: %s\n जिसका हिंदी में अनुवाद होता है: %s" % (query_lang, examples_out_row["Primary_Text"], translator.translate(examples_out_row["Translated_Text"],lang_tgt='hi'))
+                    dispatcher.utter_message(text = out_text)
+                else:
+                    dispatcher.utter_message(text = "क्षमा करें! हमारे पास %s भाषा के रिकॉर्ड नहीं हैं।" % query_lang)
+        except:
+            dispatcher.utter_message(text = "Google API से संपर्क करने में असमर्थ, पुनः प्रयास करें।")
+
+        return []

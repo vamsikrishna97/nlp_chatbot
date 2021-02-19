@@ -31,6 +31,12 @@ rules:
    - intent: thanks
    - action: utter_thanks
 
+ - rule: give example and its translation in a language
+   steps:
+   - intent: example_language
+   - action: action_example_language
+   - action: feedback_reply
+
   # - rule: submit form
  #   condition:
  #   - active_loop: newsletter_form
