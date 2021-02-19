@@ -14,7 +14,10 @@ from rasa_sdk.executor import CollectingDispatcher
 
 import pandas as pd
 import os
-import goslate
+#import goslate
+from google_trans_new import google_translator 
+import re
+
 
 class ActionLanguageSearch(Action):
 
@@ -35,11 +38,19 @@ class ActionLanguageSearch(Action):
             print(query_lang)
 
             try:
-                gs = goslate.Goslate()
-                final  = gs.translate(query_lang, 'en')
-                print(final)
-                out_row = wals_data[wals_data["Name"] == final].to_dict("records")
-
+                translator = google_translator() 
+                #gs = goslate.Goslate()
+                #final  = gs.translate(query_lang, 'en')
+                final = translator.translate(query_lang,lang_tgt='en')
+                final = final.lower()
+                final = re.sub("[^a-zA-Z]+", "", final)
+                
+                print(len(re.sub("[^a-zA-Z]+", "", final)))
+                print(type(final))
+                print(final == 'hindi')
+                out_row = wals_data[wals_data["Name"].str.lower() == final].to_dict("records")
+                #print(wals_data[wals_data["Name"]=='Hindi'])
+                #print(out_row)
                 if len(out_row) > 0:
                     out_row = out_row[0]
                     out_text = "%s भाषा %s परिवार से संबंधित है।\nइसका जीनस %s है।\nइसका ISO कोड %s है।" % (query_lang, out_row["Family"], out_row["Genus"], out_row["ISO_codes"])
