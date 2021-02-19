@@ -136,20 +136,24 @@ class TLFLanguages(Action):
             query_lang = entities.pop()
             query_lang = query_lang.lower().title()
             print(query_lang)
+            translator = google_translator() 
+            final = translator.translate(query_lang,lang_tgt='en')
+            final = final.lower()
+            final = re.sub("[^a-zA-Z]+", "", final)
+            print(final)
             try:
-                out_row = df[df['L1 - Mother tongue'] == query_lang ]
+                out_row = df[df['L1 - Mother tongue'] == final ]['Name'].tolist()
+                print(out_row)
                 if len(out_row) > 0:
-                    people = []
-                    for i in range(len(out_row)):
-                        people.append(out_row[i]["Name"])
-                    print(people)
-                    out_text = "%s की भाषा/एँ: \n%s" % (query_lang, ", ".join(languages))
+                    out_text = 'ये लोग {} बोलते हैं \n'.format(query_lang)
+                    for i, val in enumerate(out_row,1):
+                        out_text += '{}. {} \n'.format(i,val)
                     dispatcher.utter_message(text = out_text)
                 else:
-                    dispatcher.utter_message(text = 'could not find {}'.format(query_lang))
+                    dispatcher.utter_message(text = 'डेटा में {} नहीं मिली'.format(query_lang))
         
             except:
-                dispatcher.utter_message(text = "LOLWA")
+                dispatcher.utter_message(text = "Google API से संपर्क करने में असमर्थ, पुनः प्रयास करें।")
 
 
         return []
